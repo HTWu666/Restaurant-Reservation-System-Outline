@@ -3,7 +3,7 @@ import util from 'util'
 
 const jwtVerify = util.promisify(jwt.verify)
 
-const parseUpn = (req, res, next) => async (type) => {
+const parseUpn = (type) => async (req, res, next) => {
   try {
     const { upn } = req.query
     if (!upn) {
