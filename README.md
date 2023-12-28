@@ -64,13 +64,15 @@ One of the standout features of Outline is its AI customer service, which prompt
 
 ### Reservation
 
-![image](https://d1iiwo05ednfy2.cloudfront.net/%E6%96%B0%E5%A2%9E%E8%A8%82%E4%BD%8D+-+Google+Chrome+2023-12-27+22-19-36.mp4)
+https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/fc746251-5eed-4c43-9455-a80571256504
 
 ### Waitlist
 
+https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/379208c1-5687-4b38-b04e-27c1d3aaac50
+
 ### Restaurant Traffic Analysis Dashboard
 
-![image](https://d1iiwo05ednfy2.cloudfront.net/%E6%B5%81%E9%87%8F%E5%A0%B1%E8%A1%A8+-+Outline+-+Google+Chrome+2023-12-28+00-48-44.mp4)
+https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/7697643b-541a-40cb-afeb-e1909a55c822
 
 ### Demo Account
 
