@@ -3,7 +3,7 @@
   <a href="https://www.nonstops.site/">Website</a>
 </div>
 
-![UTLINE](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/b248a093-975f-4874-8948-32e7f43c8c79)
+![OUTLINE](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/b248a093-975f-4874-8948-32e7f43c8c79)
 
 Outline is a restaurant reservation system designed to enhance management efficiency and reduce labor costs for restaurants. This system is equipped with four key features:
 
