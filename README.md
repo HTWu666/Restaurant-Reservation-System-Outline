@@ -1,10 +1,12 @@
 <h1 align="center">OUTLINE</h1>
 <div align="center">
-  <a href="https://www.nonstops.site/">Website</a>
+  :confetti_ball:<a href="https://www.nonstops.site/">Website</a>:confetti_ball:
 </div>
-
-![OUTLINE](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/b248a093-975f-4874-8948-32e7f43c8c79)
-
+<br>
+<div align="center" style="margin-top:5px">
+  <img src="https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/55d5ab11-7dcc-45de-9e92-ba2a2179ad36" alt="Outline logo">
+</div>
+<br>
 Outline is a restaurant reservation system designed to enhance management efficiency and reduce labor costs for restaurants. This system is equipped with four key features:
 
 1. Reservation Management
@@ -13,8 +15,15 @@ Outline is a restaurant reservation system designed to enhance management effici
 4. AI Customer Service
 
 The system's architecture includes horizontal scaling and cache write-back, handling high-concurrency reservations effectively. These features ensure Outline's scalability, stability, and availability.
+<br>
 
 ## Table of Content
+
+- [Tech Stack](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#tech-stack)
+- [Features](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#features)
+- [Architecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#architecture)
+- [Database Schema](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#database-schema)
+  <br>
 
 ## Tech Stack
 
@@ -58,10 +67,7 @@ The system's architecture includes horizontal scaling and cache write-back, hand
 ![image](https://img.shields.io/badge/k6-7D64FF.svg?style=for-the-badge&logo=k6&logoColor=white)
 ![image](https://img.shields.io/badge/Vitest-6E9F18.svg?style=for-the-badge&logo=Vitest&logoColor=white)
 
-### Networking
-
-- HTTPS
-- Domain Name System (DNS)
+<br>
 
 ## Features
 
@@ -95,6 +101,8 @@ https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/12623212
 | ------------- | -------- |
 | test@test.com | Test123/ |
 
+<br>
+
 ## Architecture
 
 ### Reservation Architecture
@@ -109,26 +117,34 @@ The diagram below illustrates the backend architecture of our restaurant reserva
 Achieved a stateless server configuration through the implementation of the aforementioned architectural design.
 
 ![Reservation Architecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/3dd7fc53-6acb-46de-b2c3-479e8748d5cd)
+Figure 1 Reservation Architecture
 
 ### High Concurrent Reservation Request Architecture
 
-For popular restaurants, the release of new available reservation times often triggers a surge of reservation requests simultaneously. The Outline reservation system handles these concurrent requests through time-scheduled Auto Scaling and a cache write-back mechanism. Currently, we're using k6 for spike testing, and the experimental results indicate:
+For popular restaurants, the release of new available reservation times often triggers a surge of reservation requests simultaneously. The Outline reservation system handles these concurrent requests through time-scheduled Auto Scaling and a cache write-back mechanism as shown in figure 2. The k6 spike testing indicates:
 
-1. As shown in the following figure, the relationship between the number of EC2 instances and RPS (Requests Per Second) can be deduced from the regression line (RPS = 659.13 \* (#EC2 instances) - 101.71), allowing us to estimate the necessary number of horizontally scaled EC2 instances to handle a corresponding RPS. This also enables cost estimation based on EC2 pricing.
-2. The diagram below indicates that the CPU usage of Redis remains below 30% during spike testing suggests that this system architecture can withstand concurrent requests exceeding 5000 RPS. The upper limit is yet to be tested.
+1. As shown in the figure 3, the relationship between the number of EC2 instances and RPS (Requests Per Second) can be deduced from the regression line (RPS = 659.13 \* (#EC2 instances) - 101.71), allowing us to estimate the necessary number of horizontally scaled EC2 instances to handle a corresponding RPS. This also enables cost estimation based on EC2 pricing.
+
+2. Figure 4 indicates that the CPU utilization of Redis remains below 30% during spike testing suggests that this system architecture can withstand concurrent requests exceeding 5000 RPS. The upper limit is yet to be tested.
 
 ![High Concurrent Request Arichitecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/34eb06be-363c-475c-bd4b-57013d5e0f35)
+Figure 2 High Concurrent Request Architecture
 
 ![EC2 Horizontal Scaling Effect on RPS](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/2eed8d53-90fd-4a78-ad92-f1be334ebbb4)
+Figure 3 EC2 Horizontal Scaling Effect on RPS
 
 ![Redis CPU during spike testing](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/c6659d3c-469c-4b58-8e83-fb7ad7bab6e5)
+Figure 4 CPU utilization of Redis during spike testing.
 
 ### Waitlist Architecture
 
 As illustrated in the diagram, this is the architecture of the waitlist system. Following a successful waitlisting, the server updates the number queue in real-time using Socket.IO.
 
 ![waitlist architecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/fdbffd30-ce49-4059-a8a1-d4510154f3bb)
+Figure 5 Waitlist Architecture
+<br>
 
 ## Database Schema
 
 ![outline_database_schema](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/d9d05197-b75f-4ae5-b451-1a6fe462b314)
+Figure 6 Database Schema
