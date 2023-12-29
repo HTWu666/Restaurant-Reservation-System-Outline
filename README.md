@@ -1,4 +1,9 @@
-# OUTLINE
+<h1 align="center">OUTLINE</h1>
+<div align="center">
+  <a href="https://www.nonstops.site/">Website</a>
+</div>
+
+![UTLINE](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/b248a093-975f-4874-8948-32e7f43c8c79)
 
 Outline is a restaurant reservation system designed to enhance management efficiency and reduce labor costs for restaurants. This system is equipped with four key features:
 
@@ -96,10 +101,10 @@ https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/12623212
 
 The diagram below illustrates the backend architecture of our restaurant reservation system, which is divided into four main components:
 
-1. Asynchronous Reservation Confirmation Notifications: Upon successful reservation, the server places the reservation details into AWS SQS. A Lambda function then acts as a worker using Gmail with SMTP to send confirmation emails to guests.
-2. AI Customer Service: This is implemented through integration with OpenAI.
-3. Automatic Update of Available Reservation Times: Scheduled via AWS EventBridge to periodically trigger a Lambda function that updates the database with available reservation times.
-4. Cache Write-Back Mechanism: During the reservation process, database updates are asynchronously managed using a cache write-back mechanism, as detailed in the second architecture diagram.
+1. **Asynchronous Reservation Confirmation Notifications:** Upon successful reservation, the server places the reservation details into AWS SQS. A Lambda function then acts as a worker using Gmail with SMTP to send confirmation emails to guests.
+2. **AI Customer Service:** This is implemented through integration with OpenAI.
+3. **Automatic Update of Available Reservation Times:** Scheduled via AWS EventBridge to periodically trigger a Lambda function that updates the database with available reservation times.
+4. **Cache Write-Back Mechanism:** During the reservation process, database updates are asynchronously managed using a cache write-back mechanism, as detailed in the second architecture diagram.
 
 Achieved a stateless server configuration through the implementation of the aforementioned architectural design.
 
@@ -109,7 +114,7 @@ Achieved a stateless server configuration through the implementation of the afor
 
 For popular restaurants, the release of new available reservation times often triggers a surge of reservation requests simultaneously. The Outline reservation system handles these concurrent requests through time-scheduled Auto Scaling and a cache write-back mechanism. Currently, we're using k6 for spike testing, and the experimental results indicate:
 
-1. As shown in the following figure, the relationship between the number of EC2 instances and RPS (Requests Per Second) can be deduced from the regression line, allowing us to estimate the necessary number of horizontally scaled EC2 instances to handle a corresponding RPS. This also enables cost estimation based on EC2 pricing.
+1. As shown in the following figure, the relationship between the number of EC2 instances and RPS (Requests Per Second) can be deduced from the regression line (RPS = 659.13 \* (#EC2 instances) - 101.71), allowing us to estimate the necessary number of horizontally scaled EC2 instances to handle a corresponding RPS. This also enables cost estimation based on EC2 pricing.
 2. The diagram below indicates that the CPU usage of Redis remains below 30% during spike testing suggests that this system architecture can withstand concurrent requests exceeding 5000 RPS. The upper limit is yet to be tested.
 
 ![High Concurrent Request Arichitecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/34eb06be-363c-475c-bd4b-57013d5e0f35)
@@ -127,7 +132,3 @@ As illustrated in the diagram, this is the architecture of the waitlist system. 
 ## Database Schema
 
 ![outline_database_schema](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/d9d05197-b75f-4ae5-b451-1a6fe462b314)
-
-## Contact Me
-
-<a href="https://www.linkedin.com/in/hui-ting-wu-7b6732149/">![image](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white)</a>
