@@ -1,16 +1,13 @@
 # OUTLINE
 
-A Restaurant Reservation System
+Outline is a restaurant reservation system designed to enhance management efficiency and reduce labor costs for restaurants. This system is equipped with four key features:
 
-Outline is an innovative restaurant reservation system designed to enhance management efficiency and reduce labor costs for restaurants. This system is equipped with four key features:
+1. Reservation Management
+2. Waitlist Management
+3. Traffic Dashboard
+4. AI Customer Service
 
-Reservation Management: Efficiently handles and organizes reservations.
-Waitlist Management: Streamlines the process of managing waiting guests.
-Traffic Dashboard: Provides detailed reports on customer flow.
-AI Customer Service: Offers immediate responses to common queries through AI assistance.
-A key aspect of Outline is its use of Role-Based Access Control (RBAC) for system user management, ensuring secure and structured access to different functionalities. The system boasts high automation; for instance, guests receive automatic confirmation emails upon successful reservation. Additionally, Outline updates available reservation slots online at a fixed time daily, enhancing operational efficiency.
-
-One of the standout features of Outline is its AI customer service, which promptly addresses frequent guest inquiries, providing a seamless user experience. The system's architecture, incorporating timely horizontal scaling and cache write-back strategies, is adept at handling high-concurrency reservation requests. This design contributes to Outline's scalability, stability, and high availability, making it an ideal solution for modern restaurant management.
+The system's architecture includes horizontal scaling and cache write-back, handling high-concurrency reservations effectively. These features ensure Outline's scalability, stability, and availability.
 
 ## Table of Content
 
@@ -21,15 +18,16 @@ One of the standout features of Outline is its AI customer service, which prompt
 ![image](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![image](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![image](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white)
-![image](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![image](https://img.shields.io/badge/Socket.io-010101?&style=for-the-badge&logo=Socket.io&logoColor=white)
-![image](https://img.shields.io/badge/ChatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991.svg?style=for-the-badge&logo=OpenAI&logoColor=white)
 ![image](https://img.shields.io/badge/Lua-2C2D72.svg?style=for-the-badge&logo=Lua&logoColor=white)
-
 ![image](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
+
 ![image](https://img.shields.io/badge/Chart%20js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
 
 ### Cloud Service (AWS)
+
+![image](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 
 - EC2
 - RDS
@@ -64,15 +62,27 @@ One of the standout features of Outline is its AI customer service, which prompt
 
 ### Reservation
 
+After logging in, restaurant operators can navigate to the reservation management page. Here, they have the option to manually enter customer reservation details in the 'Add Reservation' section. Additionally, they can visit the 'Confirm Reservations' section to view all reservation information and make necessary status updates as required
+
 https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/fc746251-5eed-4c43-9455-a80571256504
 
 ### Waitlist
+
+After logging into Outline, operators can access the reservation management page and select 'Add to Waitlist' to manually enter a customer's waitlist information. Once the waitlisting is successful, a waitlist number will be generated. Operators can then proceed to the waitlist confirmation page and click 'Call Number' to notify customers in real-time about their advancing position in the queue.
 
 https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/379208c1-5687-4b38-b04e-27c1d3aaac50
 
 ### Restaurant Traffic Analysis Dashboard
 
+Upon accessing the Traffic Report page, restaurant operators can view peak customer flow times, enabling them to better schedule staff shifts and plan for ingredient purchases accordingly.
+
 https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/7697643b-541a-40cb-afeb-e1909a55c822
+
+### AI Customer Service
+
+Within the restaurant reservation page for consumers, visitors can click on the AI customer service icon in the bottom right corner to inquire about frequently asked questions regarding the restaurant. This feature significantly reduces the workload on the restaurant's waitstaff by handling common guest inquiries.
+
+https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/ce5191e0-061d-4a35-bbd3-b11e01c71078
 
 ### Demo Account
 
@@ -84,20 +94,40 @@ https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/12623212
 
 ### Reservation Architecture
 
-![image](https://d1iiwo05ednfy2.cloudfront.net/Reservation+Architecture.png)
+The diagram below illustrates the backend architecture of our restaurant reservation system, which is divided into four main components:
+
+1. Asynchronous Reservation Confirmation Notifications: Upon successful reservation, the server places the reservation details into AWS SQS. A Lambda function then acts as a worker using Gmail with SMTP to send confirmation emails to guests.
+2. AI Customer Service: This is implemented through integration with OpenAI.
+3. Automatic Update of Available Reservation Times: Scheduled via AWS EventBridge to periodically trigger a Lambda function that updates the database with available reservation times.
+4. Cache Write-Back Mechanism: During the reservation process, database updates are asynchronously managed using a cache write-back mechanism, as detailed in the second architecture diagram.
+
+Achieved a stateless server configuration through the implementation of the aforementioned architectural design.
+
+![Reservation Architecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/3dd7fc53-6acb-46de-b2c3-479e8748d5cd)
 
 ### High Concurrent Reservation Request Architecture
 
-![image](https://d1iiwo05ednfy2.cloudfront.net/High+Concurrent+Request+Arichitecture.png)
+For popular restaurants, the release of new available reservation times often triggers a surge of reservation requests simultaneously. The Outline reservation system handles these concurrent requests through time-scheduled Auto Scaling and a cache write-back mechanism. Currently, we're using k6 for spike testing, and the experimental results indicate:
+
+1. As shown in the following figure, the relationship between the number of EC2 instances and RPS (Requests Per Second) can be deduced from the regression line, allowing us to estimate the necessary number of horizontally scaled EC2 instances to handle a corresponding RPS. This also enables cost estimation based on EC2 pricing.
+2. The diagram below indicates that the CPU usage of Redis remains below 30% during spike testing suggests that this system architecture can withstand concurrent requests exceeding 5000 RPS. The upper limit is yet to be tested.
+
+![High Concurrent Request Arichitecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/34eb06be-363c-475c-bd4b-57013d5e0f35)
+
+![EC2 Horizontal Scaling Effect on RPS](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/2eed8d53-90fd-4a78-ad92-f1be334ebbb4)
+
+![Redis CPU during spike testing](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/c6659d3c-469c-4b58-8e83-fb7ad7bab6e5)
 
 ### Waitlist Architecture
 
-![image](https://d1iiwo05ednfy2.cloudfront.net/waitlist+architecture.png)
+As illustrated in the diagram, this is the architecture of the waitlist system. Following a successful waitlisting, the server updates the number queue in real-time using Socket.IO.
+
+![waitlist architecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/fdbffd30-ce49-4059-a8a1-d4510154f3bb)
 
 ## Database Schema
 
-![image](https://d1iiwo05ednfy2.cloudfront.net/outline_database_schema.png)
+![outline_database_schema](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/d9d05197-b75f-4ae5-b451-1a6fe462b314)
 
 ## Contact Me
 
-![image](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white) [Hui-Ting Wu](https://www.linkedin.com/in/hui-ting-wu-7b6732149/)
+<a href="https://www.linkedin.com/in/hui-ting-wu-7b6732149/">![image](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white)</a>
