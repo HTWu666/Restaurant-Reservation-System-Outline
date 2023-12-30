@@ -2,11 +2,15 @@
 <div align="center">
   :confetti_ball:<a href="https://www.nonstops.site/">Website</a>:confetti_ball:
 </div>
+
 <br>
+
 <div align="center" style="margin-top:5px">
   <img src="https://github.com/HTWu666/Restaurant-Reservation-System-Outline/assets/126232123/55d5ab11-7dcc-45de-9e92-ba2a2179ad36" alt="Outline logo">
 </div>
+
 <br>
+
 Outline is a restaurant reservation system designed to enhance management efficiency and reduce labor costs for restaurants. This system is equipped with four key features:
 
 1. Reservation Management
@@ -14,7 +18,8 @@ Outline is a restaurant reservation system designed to enhance management effici
 3. Traffic Dashboard
 4. AI Customer Service
 
-The system's architecture includes horizontal scaling and cache write-back, handling high-concurrency reservations effectively. These features ensure Outline's scalability, stability, and availability.
+This system utilizes AWS services to achieve a stateless architecture, enhancing scalability. It employs horizontal scaling and a cache write-back strategy for efficiently handling high-concurrency reservation requests. These features collectively ensure the system's high availability, high reliability, and high performance.
+
 <br>
 
 ## Table of Content
@@ -23,7 +28,8 @@ The system's architecture includes horizontal scaling and cache write-back, hand
 - [Features](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#features)
 - [Architecture](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#architecture)
 - [Database Schema](https://github.com/HTWu666/Restaurant-Reservation-System-Outline/blob/main/README.md#database-schema)
-  <br>
+
+<br>
 
 ## Tech Stack
 
